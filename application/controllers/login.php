@@ -22,8 +22,9 @@ class Login extends CI_Controller
         $sub_data['login_failed'] ='';
 
         $data = array(
-            'title' => 'Login',
+            'title' => 'Sign in',
             'menu_top' => $this->menu_model->menu_top(),
+            'dont_show_menu' => true,
             'styles' => array('signin'),
             'body' => $this->load->view('_login_form', $sub_data, true)
         );
@@ -52,7 +53,7 @@ class Login extends CI_Controller
                 }
                 else
                 {
-                    $sub_data['login_failed'] = "Invalid username or password";
+                    $sub_data['login_failed'] = 'Invalid username or password';
                     $data['body'] = $this->load->view('_login_form', $sub_data, true);
                     $this->load->view('header_view', $data);
                     $this->load->view('_login_form');

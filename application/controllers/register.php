@@ -13,15 +13,18 @@ class Register extends CI_Controller
 
     function index()
     {
-        if($this->auth_model->is_user_logged()=== true)
+        if ($this->auth_model->is_user_logged()=== true)
         {
             redirect(base_url());
         }
 
-        $data['title'] = 'Sign up!';
-        $data['menu_top'] = $this->menu_model->menu_top();
+        $data = array(
+            'title' => 'Sign up',
+            'menu' => $this->menu_model->menu_top()
+        );
 
-        if($this->input->post('submit')) {
+        if ($this->input->post('submit')) {
+
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('username', 'User name', 'trim|required|alpha_dash|min_length[3]|max_length[20]|xss_clean');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]|matches[passconf]|xss_clean');
@@ -36,7 +39,7 @@ class Register extends CI_Controller
 
             if ($this->form_validation->run() == FALSE)
             {
-                $data['body']  = $this->load->view('_sign_up_view');
+                //$data['body']  = $this->load->view('_sign_up_view');
             }
             else
             {
@@ -52,7 +55,7 @@ class Register extends CI_Controller
 
                 if ($query->num_rows() > 0)
                 {
-                    $data['body']  = $this->load->view('_sign_up_view');
+                    //$data['body']  = $this->load->view('_sign_up_view');
                 }
                 else
                 {
@@ -68,21 +71,25 @@ class Register extends CI_Controller
                                         'salt' => $rand_salt
                     );
 
-                    if($this->db->insert('users', $input_data))
+                    if ($this->db->insert('users', $input_data))
                     {
-                        $data['body']  = "Registration success, please login<br/>";
+                        //$data['body']  = "Registration success, please login<br/>";
                     }
                     else
                     {
-                        $data['body']  = "error on query";
+                        //$data['body']  = "error on query";
                     }
                 }
             }
         }
-        else{
-            $data['body']  = $this->load->view('_sign_up_view');
+        else
+        {
+            //$data['body']  = $this->load->view('_sign_up_view');
         }
-        $this->load->view('_output_html', $data);
+
+        $this->load->view('header_view', $data);
+        $this->load->view('_sign_up_view');
+        $this->load->view('footer_view');
 
     }
 }

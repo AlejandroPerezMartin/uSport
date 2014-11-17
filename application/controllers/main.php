@@ -15,7 +15,7 @@ class Main extends CI_Controller
         $data = array(
             'title' => 'Main page',
             'description' => 'Page description goes here!',
-            'styles' => array(),
+            'styles' => array('carousel'),
             'menu' => $this->menu_model->menu_top()
         );
 

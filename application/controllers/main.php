@@ -6,7 +6,6 @@ class Main extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
         $this->load->library(array('session'));
         $this->load->model(array('auth_model', 'menu_model'));
     }
@@ -16,6 +15,7 @@ class Main extends CI_Controller
         $data = array(
             'title' => 'Main page',
             'description' => 'Page description goes here!',
+            'styles' => array(),
             'menu' => $this->menu_model->menu_top()
         );
 

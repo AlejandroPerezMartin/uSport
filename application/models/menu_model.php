@@ -36,7 +36,7 @@ class Menu_Model extends CI_Model
             array(
               'title' => 'Logout',
               'description' => 'Close this session',
-              'url' => base_url() . 'index.php/login/logout'
+              'url' => base_url() . 'index.php/logout'
             )
         );
 

@@ -8,31 +8,38 @@ class Login extends CI_Controller
         parent::__construct();
         $this->load->library(array('session', 'form_validation'));
         $this->load->model(array('auth_model', 'menu_model'));
-        $this->load->helper(array('html','form', 'url'));
+        $this->load->helper(array('html', 'form', 'url'));
     }
 
     function index()
     {
 
-        if($this->auth_model->is_user_logged()=== true)
+        if ($this->auth_model->is_user_logged()=== true)
         {
             redirect(base_url());
         }
 
         $sub_data['login_failed'] ='';
-        $data['title'] = 'Login';
-        $data['menu_top'] = $this->menu_model->menu_top();
-        $data['body'] = $this->load->view('_login_form',$sub_data, true);
+
+        $data = array(
+            'title' => 'Login',
+            'menu_top' => $this->menu_model->menu_top(),
+            'styles' => array('signin'),
+            'body' => $this->load->view('_login_form', $sub_data, true)
+        );
 
         if ($this->input->post('submit_login'))
         {
             $this->form_validation->set_rules('username', 'username', 'trim|required|min_length[3]|max_length[20]|xss_clean');
             $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[5]|max_length[35]|xss_clean');
-            $this->form_validation->set_error_delimiters('<div style="color:red;">', '</div>');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> ', '</div>');
 
-            if ($this->form_validation->run() == FALSE){
-                $data['body'] = $this->load->view('_login_form',$sub_data , true);
-                $this->load->view('_output_html', $data);
+            if ($this->form_validation->run() == FALSE)
+            {
+                $data['body'] = $this->load->view('_login_form', $sub_data, true);
+                $this->load->view('header_view', $data);
+                $this->load->view('_login_form');
+                $this->load->view('footer_view');
             }
             else
             {
@@ -46,21 +53,19 @@ class Login extends CI_Controller
                 else
                 {
                     $sub_data['login_failed'] = "Invalid username or password";
-                    $data['body'] = $this->load->view('_login_form',$sub_data , true);
-                    $this->load->view('_output_html', $data);
+                    $data['body'] = $this->load->view('_login_form', $sub_data, true);
+                    $this->load->view('header_view', $data);
+                    $this->load->view('_login_form');
+                    $this->load->view('footer_view');
                 }
             }
         }
         else
         {
-            $this->load->view('_output_html', $data);
+            $this->load->view('header_view', $data);
+            $this->load->view('_login_form');
+            $this->load->view('footer_view');
         }
-    }
-
-    function logout()
-    {
-        $this->session->sess_destroy();
-        redirect(base_url().'index.php/login/');
     }
 
 }

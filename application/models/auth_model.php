@@ -17,16 +17,16 @@ class Auth_Model extends CI_Model
         if (!isset($login_array_input) || count($login_array_input) != 2) return false;
 
         //set its variable
-        $username = $login_array_input[0];
+        $email = $login_array_input[0];
         $password = $login_array_input[1];
 
         // select data from database to check user exist or not?
-        $query = $this->db->query("SELECT * FROM `users` WHERE `username`='" . $username . "' LIMIT 1");
+        $query = $this->db->query("SELECT * FROM `users` WHERE `email`='" . $email . "' LIMIT 1");
 
         if ($query->num_rows() > 0)
         {
             $row = $query->row();
-            $user_id = $row->ID;
+            $user_id = $row->id;
             $user_pass = $row->password;
             $user_salt = $row->salt;
 
@@ -36,6 +36,7 @@ class Auth_Model extends CI_Model
                 return true;
             }
         }
+
         return false;
     }
 
@@ -46,7 +47,7 @@ class Auth_Model extends CI_Model
 
     function get_logged_user_id()
     {
-        return ($this->check_logged()) ? $this->session->userdata('logged_user') : '';
+        return ($this->is_user_logged()) ? $this->session->userdata('logged_user') : '';
     }
 
 }

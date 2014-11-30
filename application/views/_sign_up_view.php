@@ -6,7 +6,7 @@
     echo form_open(base_url() . 'index.php/register/', $attributes);
 ?>
 
-<span><?php echo validation_errors() ?></span>
+<?php if (validation_errors()) echo '<div class="alert alert-danger" role="alert">' . validation_errors() . '</div>' ?>
 
 <fieldset>
 
@@ -146,7 +146,7 @@
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Create account" name="submit" class="btn btn-lg btn-primary"/>
+        <input type="submit" value="Create account" name="submit" class="btn btn-lg btn-success"/>
     </div>
 
 </fieldset>

@@ -1,6 +1,7 @@
 <?php
 
-class Encrypt_Model extends CI_Model {
+class Encrypt_Model extends CI_Model
+{
 
     function __construct()
     {
@@ -11,11 +12,9 @@ class Encrypt_Model extends CI_Model {
     function genRndDgt($length = 8, $specialCharacters = true)
     {
         $digits = '';
-        $chars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        $chars  = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-        if($specialCharacters === true)
-            $chars .= "!?=/&+,.";
-
+        if($specialCharacters === true) $chars .= "!?=/&+,.";
 
         for($i = 0; $i < $length; $i++) {
             $x = mt_rand(0, strlen($chars) -1);
@@ -26,12 +25,14 @@ class Encrypt_Model extends CI_Model {
     }
 
     // Generate Random Salt for Password encryption
-    function genRndSalt() {
+    function genRndSalt()
+    {
         return $this->genRndDgt(8, true);
     }
 
     // Encrypt User Password
-    function encryptUserPwd($pwd, $salt) {
+    function encryptUserPwd($pwd, $salt)
+    {
         return sha1(md5($pwd) . $salt);
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 class Register extends CI_Controller
 {
 
@@ -27,7 +28,8 @@ class Register extends CI_Controller
             'menu' => $this->menu_model->menu_top()
         );
 
-        if ($this->input->post('submit')) {
+        if ($this->input->post('submit'))
+        {
 
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
@@ -52,16 +54,16 @@ class Register extends CI_Controller
             }
             else
             {
-                $name = $this->input->post('name');
-                $surname = $this->input->post('surname');
-                $email = $this->input->post('email');
-                $birthdate = $this->input->post('birthdate');
-                $password = $this->input->post('password');
-                $country = $this->input->post('country');
-                $city = $this->input->post('city');
-                $gender = $this->input->post('gender');
+                $name           = $this->input->post('name');
+                $surname        = $this->input->post('surname');
+                $email          = $this->input->post('email');
+                $birthdate      = $this->input->post('birthdate');
+                $password       = $this->input->post('password');
+                $country        = $this->input->post('country');
+                $city           = $this->input->post('city');
+                $gender         = $this->input->post('gender');
                 $favouritesport = $this->input->post('favouritesport');
-                $terms = $this->input->post('terms');
+                $terms          = $this->input->post('terms');
 
                 $check_query = "SELECT * FROM `users` WHERE `email`='$email'";
                 $query = $this->db->query($check_query);
@@ -109,4 +111,5 @@ class Register extends CI_Controller
 
     }
 }
+
 ?>

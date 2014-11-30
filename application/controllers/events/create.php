@@ -1,8 +1,10 @@
 <?php
 
-class Create extends CI_Controller {
+class Create extends CI_Controller
+{
 
-    function __construct(){
+    function __construct()
+    {
         parent::__construct();
         $this->load->library(array('form_validation'));
         $this->load->model(array('menu_model'));
@@ -10,7 +12,8 @@ class Create extends CI_Controller {
         $this->load->database();
     }
 
-    function index(){
+    function index()
+    {
 
         if ($this->auth_model->is_user_logged() === false)
         {
@@ -22,7 +25,8 @@ class Create extends CI_Controller {
             'menu' => $this->menu_model->menu_top()
         );
 
-        if ($this->input->post('submit')) {
+        if ($this->input->post('submit'))
+        {
 
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('description', 'Description', 'trim|required|xss_clean');
@@ -42,14 +46,14 @@ class Create extends CI_Controller {
             }
             else
             {
-                $name = $this->input->post('name');
+                $name        = $this->input->post('name');
                 $description = $this->input->post('description');
-                $photo = $this->input->post('photo');
-                $address = $this->input->post('address');
-                $city = $this->input->post('city');
-                $sport = $this->input->post('sport');
-                $price = $this->input->post('price');
-                $maxmembers = $this->input->post('maxmembers');
+                $photo       = $this->input->post('photo');
+                $address     = $this->input->post('address');
+                $city        = $this->input->post('city');
+                $sport       = $this->input->post('sport');
+                $price       = $this->input->post('price');
+                $maxmembers  = $this->input->post('maxmembers');
 
                     $input_data = array(
                                         'name' => $name,

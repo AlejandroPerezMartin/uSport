@@ -87,7 +87,7 @@
 
     <div class="form-group">
         <div class="col-xs-3">
-            <input type="submit" value="Create event" name="submit" class="btn btn-lg btn-primary" />
+            <input type="submit" value="Create event" name="submit" class="btn btn-lg btn-success" />
         </div>
     </div>
 

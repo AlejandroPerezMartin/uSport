@@ -1,3 +1,6 @@
+
+<p class="navbar-text">Welcome <?php echo $username; ?>!</p>
+
 <?php
 
 foreach ($menu as $menu_item)

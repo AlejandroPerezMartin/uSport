@@ -22,11 +22,11 @@ class Login extends CI_Controller
         $sub_data['login_failed'] ='';
 
         $data = array(
-            'title' => 'Sign in',
-            'menu_top' => $this->menu_model->menu_top(),
+            'title'          => 'Sign in',
+            'menu_top'       => $this->menu_model->menu_top(),
             'dont_show_menu' => true,
-            'styles' => array('signin'),
-            'body' => $this->load->view('_login_form', $sub_data, true)
+            'styles'         => array('signin'),
+            'body'           => $this->load->view('_login_form', $sub_data, true)
         );
 
         if ($this->input->post('submit_login'))

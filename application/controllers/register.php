@@ -34,7 +34,7 @@ class Register extends CI_Controller
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
             $this->form_validation->set_rules('email', 'Email',  'trim|required|min_length[3]|max_length[30]|valid_email');
-            $this->form_validation->set_rules('birthdate', 'Birth date',  'trim|required|callback_validate_birthdate');
+            $this->form_validation->set_rules('birthdate', 'Birth date', 'trim|required|callback_date_valid');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[3]|max_length[20]|matches[passconf]|xss_clean');
             $this->form_validation->set_rules('passconf', 'Confirm Password', 'trim|required|min_length[3]|max_length[20]|xss_clean');
             $this->form_validation->set_rules('country', 'Country', 'trim|required|xss_clean');
@@ -42,8 +42,6 @@ class Register extends CI_Controller
             $this->form_validation->set_rules('gender', 'Gender', 'trim|required|xss_clean');
             $this->form_validation->set_rules('favouritesport', 'Favourite Sports', 'trim|required|xss_clean');
             $this->form_validation->set_rules('terms', 'Terms of Sevices', 'trim|required|xss_clean');
-
-            $this->form_validation->set_message('validate_birthdate','Member is not valid!');
 
             // Set Custom messages
             //$this->form_validation->set_message('required', 'Your custom message here');
@@ -64,9 +62,7 @@ class Register extends CI_Controller
                 $gender         = $this->input->post('gender');
                 $favouritesport = $this->input->post('favouritesport');
                 $terms          = $this->input->post('terms');
-
-                $check_query = "SELECT * FROM `users` WHERE `email`='$email'";
-                $query = $this->db->query($check_query);
+                $query          = $this->db->query('SELECT FROM `users` WHERE `email`=?', array($email));
 
                 if ($query->num_rows() > 0)
                 {
@@ -74,9 +70,9 @@ class Register extends CI_Controller
                 }
                 else
                 {
-                    $rand_salt = $this->encrypt_model->genRndSalt();
+                    $rand_salt    = $this->encrypt_model->genRndSalt();
                     $encrypt_pass = $this->encrypt_model->encryptUserPwd($this->input->post('password'), $rand_salt);
-                    $input_data = array(
+                    $input_data   = array(
                                         'name' => $name,
                                         'surname' => $surname,
                                         'email' => $email,
@@ -110,6 +106,17 @@ class Register extends CI_Controller
         $this->load->view('footer_view');
 
     }
+
+    public function date_valid($date)
+    {
+        $parts = explode("/", $date);
+
+        if (count($parts) == 3 && checkdate($parts[1], $parts[0], $parts[2])) return true;
+
+        $this->form_validation->set_message('date_valid', 'The Date field must be MM/DD/YYYY');
+        return false;
+    }
+
 }
 
 ?>

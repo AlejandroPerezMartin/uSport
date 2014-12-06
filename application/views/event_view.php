@@ -1,7 +1,10 @@
 
 <div class="container main">
 
-<h1>{event_title}</h1>
+
+<div class="page-header">
+    <h1>{event_title}</h1>
+</div>
 
 <p><strong>Event description:</strong> {event_description}</p>
 <p><strong>Event photo:</strong> {event_photo}</p>

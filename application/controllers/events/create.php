@@ -54,16 +54,18 @@ class Create extends CI_Controller
                 $sport       = $this->input->post('sport');
                 $price       = $this->input->post('price');
                 $maxmembers  = $this->input->post('maxmembers');
+                $creatorid   = $this->auth_model->get_logged_user_id();
 
                     $input_data = array(
-                                        'name' => $name,
+                                        'name'        => $name,
                                         'description' => $description,
-                                        'photo' => $photo,
-                                        'address' => $address,
-                                        'city' => $city,
-                                        'sport' => $sport,
-                                        'price' => $price,
-                                        'maxmembers' => $maxmembers,
+                                        'photo'       => $photo,
+                                        'address'     => $address,
+                                        'city'        => $city,
+                                        'sport'       => $sport,
+                                        'price'       => $price,
+                                        'maxmembers'  => $maxmembers,
+                                        'creatorid'   => $creatorid
                     );
 
                     if ($this->db->insert('events', $input_data))
@@ -74,8 +76,7 @@ class Create extends CI_Controller
                     {
                         //$data['body']  = "error on query";
                     }
-}
-
+            }
         }
         else
         {

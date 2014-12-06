@@ -25,7 +25,16 @@ class Menu_Model extends CI_Model
 
     function menu_top()
     {
-        $username = 'guest';
+        $userid = $this->auth_model-> get_logged_user_id();
+
+        if ($userid)
+        {
+          $username = $this->db->query('SELECT `name` FROM `users` WHERE `id`=? LIMIT 1', array($userid))->result()[0]->name;
+        }
+        else
+        {
+          $username = 'guest';
+        }
 
         $menu_logged = array(
             array(

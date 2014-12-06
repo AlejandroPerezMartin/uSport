@@ -14,8 +14,6 @@ CREATE TABLE IF NOT EXISTS `users` (
     PRIMARY KEY(`id`)
 ) AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
-# gmaps.js
-
 CREATE TABLE IF NOT EXISTS `events` (
     `id`                INTEGER(10)     NOT NULL AUTO_INCREMENT,
     `name`              VARCHAR(120)    NOT NULL,
@@ -26,7 +24,9 @@ CREATE TABLE IF NOT EXISTS `events` (
     `sport`             VARCHAR(20)     NOT NULL,
     `price`             FLOAT(5,2)      NOT NULL,
     `maxmembers`        INTEGER(3)      NOT NULL,
-    PRIMARY KEY(`id`)
+    `creatorid`         INTEGER(10)     NOT NULL,
+    PRIMARY KEY(`id`),
+    FOREIGN KEY(`creatorid`) REFERENCES users(`id`) ON DELETE CASCADE
 ) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `userevents` (

@@ -7,7 +7,7 @@ class Main extends CI_Controller
     {
         parent::__construct();
         $this->load->library(array('session'));
-        $this->load->model(array('auth_model', 'menu_model'));
+        $this->load->model(array('auth_model', 'menu_model', 'event_model'));
         $this->load->database();
     }
 
@@ -30,33 +30,14 @@ class Main extends CI_Controller
         } else
         {
             $this->load->view('header_view', $data);
-            $events = array('events' => $this->getEvents());
+            $events = array(
+                    'joined_events' => $this->event_model->getUserJoinedEvents(),
+                    'created_events' => $this->event_model->getUserCreatedEvents()
+            );
+
             $this->load->view('dashboard_view', $events);
             $this->load->view('footer_view');
         }
-    }
-
-    function getEvents()
-    {
-
-        $user_id = $this->auth_model->get_logged_user_id();
-
-        $query = $this->db->query("SELECT * FROM `userevents` WHERE `userid`=$user_id");
-
-        $event_ids = array();
-
-        foreach ($query->result() as $row)
-        {
-           array_push($event_ids, $row->eventid);
-        }
-
-        if ($event_ids)
-        {
-            $query = $this->db->query("SELECT * FROM `events` WHERE `id` IN (" . implode(',', $event_ids) . ")");
-            return $query->result();
-        }
-
-        return NULL;
     }
 
 }

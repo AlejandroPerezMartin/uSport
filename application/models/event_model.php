@@ -52,6 +52,56 @@ class Event_Model extends CI_Model
         return '<a href="' . base_url() . 'index.php/events/join/' . $eventId . '" class="btn btn-lg btn-primary">Join</a>';
     }
 
+    public function removeCreatedEvent(){
+
+    }
+
+    public function getUserJoinedEvents()
+    {
+
+        $user_id = $this->auth_model->get_logged_user_id();
+
+        $query = $this->db->query("SELECT * FROM `userevents` WHERE `userid`=$user_id");
+
+        $event_ids = array();
+
+        foreach ($query->result() as $row)
+        {
+           array_push($event_ids, $row->eventid);
+        }
+
+        if ($event_ids)
+        {
+            $query = $this->db->query("SELECT * FROM `events` WHERE `id` IN (" . implode(',', $event_ids) . ")");
+            return $query->result();
+        }
+
+        return NULL;
+    }
+
+    function getUserCreatedEvents()
+    {
+
+        $user_id = $this->auth_model->get_logged_user_id();
+
+        $query = $this->db->query("SELECT * FROM `events` WHERE `creatorid`=$user_id");
+
+        $event_ids = array();
+
+        foreach ($query->result() as $row)
+        {
+           array_push($event_ids, $row->id);
+        }
+
+        if ($event_ids)
+        {
+            $query = $this->db->query("SELECT * FROM `events` WHERE `id` IN (" . implode(',', $event_ids) . ")");
+            return $query->result();
+        }
+
+        return NULL;
+    }
+
 }
 
 ?>

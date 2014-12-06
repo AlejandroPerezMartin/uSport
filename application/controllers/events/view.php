@@ -1,4 +1,4 @@
-<?php
+    <?php
 
     class View extends CI_Controller
     {
@@ -19,21 +19,21 @@
             if ($eventInfo)
             {
                 $data = array(
-                    'title' => $eventInfo->name,
+                    'title'       => $eventInfo->name,
                     'description' => $eventInfo->description,
-                    'menu' => $this->menu_model->menu_top()
+                    'menu'        => $this->menu_model->menu_top()
                 );
 
                 $eventData = array(
                     'event_title'       => $eventInfo->name,
-                    'event_description' => $eventInfo->description,
+                    'event_description' => substr($eventInfo->description, 1, 10),
                     'event_photo'       => $eventInfo->photo,
                     'event_address'     => $eventInfo->address,
                     'event_city'        => $eventInfo->city,
                     'event_sport'       => $eventInfo->sport,
                     'event_price'       => $eventInfo->price,
                     'event_maxmembers'  => $eventInfo->maxmembers,
-                    'event_button' => $this->event_model->getButton($id)
+                    'event_button'      => $this->event_model->getButton($id)
                 );
 
                 $this->load->view('header_view', $data);

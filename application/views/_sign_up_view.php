@@ -37,7 +37,7 @@
     <div class="form-group">
         <div class="col-xs-2">
             <label for="registerBirthdate">Date of birth:</label>
-            <input id="registerBirthdate" type="date" name="birthdate" value="<?php echo set_value('birthdate') ?>" class="form-control" />
+            <input id="registerBirthdate" type="text" name="birthdate" value="<?php echo set_value('birthdate') ?>" class="form-control" placeholder="DD/MM/YYYY" />
         </div>
     </div>
 

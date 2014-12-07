@@ -2,17 +2,17 @@
 <div class="container main">
 
     <div class="page-header">
-      <h1>Dashboard</h1>
-  </div>
+        <h1>Dashboard</h1>
+    </div>
 
-  <p>
-    <div class="btn-group" role="group">
-        <a class="btn btn-lg btn-primary" href="<?php echo base_url() . 'index.php/events/create'; ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create event</a>
-    </div>
-    <div class="btn-group" role="group">
-        <a class="btn btn-lg btn-default" href="<?php echo base_url() . 'index.php/events/create'; ?>"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search event</a>
-    </div>
-</p>
+    <p>
+        <div class="btn-group" role="group">
+            <a class="btn btn-lg btn-primary" href="<?php echo base_url() . 'index.php/events/create'; ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create event</a>
+        </div>
+        <div class="btn-group" role="group">
+            <a class="btn btn-lg btn-default" href="<?php echo base_url() . 'index.php/events/create'; ?>"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search event</a>
+        </div>
+    </p>
 
 <br>
 
@@ -31,18 +31,20 @@
                         <div class="caption">
                             <h3><?php echo $joined_events[$i]->name; ?></h3>
                             <p><?php echo $joined_events[$i]->description; ?></p>
-                            <p><a href="<?php echo base_url() . 'index.php/events/view/id/' . $joined_events[$i]->id; ?>" class="btn btn-primary" role="button">Info.</a>
-                             <a href="<?php echo base_url() . 'index.php/events/remove/' . $joined_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button">Remove</a></p>
-                        </div>
-                    </div>
-                </div>
-            <?php endfor; ?>
-        </div>
-    </div>
-</div>
+                            <p>
+                              <a href="<?php echo base_url() . 'index.php/events/view/id/' . $joined_events[$i]->id; ?>" class="btn btn-primary" role="button">Info.</a>
+                              <a href="<?php echo base_url() . 'index.php/events/remove/' . $joined_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button">Remove</a>
+                            </p>
+                         </div>
+                       </div>
+                   </div>
+               <?php endfor; ?>
+           </div>
+       </div>
+   </div>
 
-<?php
-else:
+   <?php
+   else:
     echo '<h4 class="text-center">You don\'t have any events yet</h4>';
 endif;
 ?>
@@ -65,17 +67,17 @@ endif;
                             <h3><?php echo $created_events[$i]->name; ?></h3>
                             <p><?php echo $created_events[$i]->description; ?></p>
                             <p><a href="<?php echo base_url() . 'index.php/events/view/id/' . $created_events[$i]->id; ?>" class="btn btn-primary" role="button">Info.</a>
-                             <a href="<?php echo base_url() . 'index.php/events/remove/' . $created_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button">Leave</a></p>
-                        </div>
-                    </div>
-                </div>
-            <?php endfor; ?>
-        </div>
-    </div>
-</div>
+                               <a href="<?php echo base_url() . 'index.php/events/remove/' . $created_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button">Leave</a></p>
+                           </div>
+                       </div>
+                   </div>
+               <?php endfor; ?>
+           </div>
+       </div>
+   </div>
 
-<?php
-else:
+   <?php
+   else:
     echo '<h4 class="text-center">You haven\'t created any event yet</h4>';
 endif;
 ?>

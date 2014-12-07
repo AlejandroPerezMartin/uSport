@@ -31,7 +31,7 @@ class Main extends CI_Controller
         {
             $this->load->view('header_view', $data);
             $events = array(
-                    'joined_events' => $this->event_model->getUserJoinedEvents(),
+                    'joined_events'  => $this->event_model->getUserJoinedEvents(),
                     'created_events' => $this->event_model->getUserCreatedEvents()
             );
 

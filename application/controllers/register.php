@@ -3,10 +3,6 @@
 class Register extends CI_Controller
 {
 
-    function validate_birthdate($str){
-        return (preg_match("/^[0-9]{4}-[1-12]{2}-[1-31]{2}/", $str));
-    }
-
     function __construct()
     {
         parent::__construct();

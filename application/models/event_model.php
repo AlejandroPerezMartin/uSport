@@ -61,7 +61,7 @@ class Event_Model extends CI_Model
 
         $user_id = $this->auth_model->get_logged_user_id();
 
-        $query = $this->db->query("SELECT * FROM `userevents` WHERE `userid`=$user_id");
+        $query = $this->db->query("SELECT * FROM `userevents` WHERE `userid` = ?", array($user_id));
 
         $event_ids = array();
 
@@ -84,7 +84,7 @@ class Event_Model extends CI_Model
 
         $user_id = $this->auth_model->get_logged_user_id();
 
-        $query = $this->db->query("SELECT * FROM `events` WHERE `creatorid`=$user_id");
+        $query = $this->db->query("SELECT * FROM `events` WHERE `creatorid` = ?", array($user_id));
 
         $event_ids = array();
 

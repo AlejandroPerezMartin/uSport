@@ -6,11 +6,13 @@
     echo form_open(base_url() . 'index.php/events/create', $attributes);
 ?>
 
-<span><?php echo validation_errors() ?></span>
+<?php if (isset($message)) echo $message; ?>
+
+<?php if (validation_errors()) echo '<div class="alert alert-danger" role="alert"><p><strong>Please correct the errors below:</strong></p>' . validation_errors() . '</div>' ?>
 
 <fieldset>
 
-    <legend>Create event</legend>
+    <legend><h2>Create event</h2></legend>
 
     <div class="form-group">
         <div class="col-xs-4">
@@ -64,16 +66,6 @@
                     <option value="Volleyball" <?php echo set_select('sport', 'Volleyball'); ?> >Volleyball</option>
                     <option value="Ski" <?php echo set_select('sport', 'Ski'); ?> >Ski</option>
             </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-xs-2">
-            <div class="input-group">
-                <div class="input-group-addon">&euro;</div>
-                <label class="sr-only" for="eventPrice">Price:</label>
-                <input type="text" name="price" id="eventPrice" min="0" placeholder="Price" class="form-control" />
-            </div>
         </div>
     </div>
 

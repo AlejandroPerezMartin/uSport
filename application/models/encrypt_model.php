@@ -14,9 +14,10 @@ class Encrypt_Model extends CI_Model
         $digits = '';
         $chars  = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-        if($specialCharacters === true) $chars .= "!?=/&+,.";
+        if ($specialCharacters === true) $chars .= "!?=/&+,.";
 
-        for($i = 0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++)
+        {
             $x = mt_rand(0, strlen($chars) -1);
             $digits .= $chars{$x};
         }

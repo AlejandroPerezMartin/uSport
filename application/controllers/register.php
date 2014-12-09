@@ -3,10 +3,6 @@
 class Register extends CI_Controller
 {
 
-    function validate_birthdate($str){
-        return (preg_match("/^[0-9]{4}-[1-12]{2}-[1-31]{2}/", $str));
-    }
-
     function __construct()
     {
         parent::__construct();
@@ -28,9 +24,10 @@ class Register extends CI_Controller
             'menu' => $this->menu_model->menu_top()
         );
 
+        $info = array();
+
         if ($this->input->post('submit'))
         {
-
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
             $this->form_validation->set_rules('email', 'Email',  'trim|required|min_length[3]|max_length[30]|valid_email');
@@ -48,7 +45,7 @@ class Register extends CI_Controller
 
             if ($this->form_validation->run() == FALSE)
             {
-                //$data['body']  = $this->load->view('_sign_up_view');
+                // show errors
             }
             else
             {
@@ -62,11 +59,11 @@ class Register extends CI_Controller
                 $gender         = $this->input->post('gender');
                 $favouritesport = $this->input->post('favouritesport');
                 $terms          = $this->input->post('terms');
-                $query          = $this->db->query('SELECT FROM `users` WHERE `email`=?', array($email));
+                $query          = $this->db->query('SELECT * FROM `users` WHERE `email`=?', array($email));
 
                 if ($query->num_rows() > 0)
                 {
-                    echo "User already registered";
+                    $info['message'] = '<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <strong>Sorry</strong>, the email address provided is already in use.</div>';
                 }
                 else
                 {
@@ -87,22 +84,18 @@ class Register extends CI_Controller
 
                     if ($this->db->insert('users', $input_data))
                     {
-                        //$data['body']  = "Registration success, please login<br/>";
+                        $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you are registered! Now you can <a href="' . base_url() . 'index.php/login" title="Login to your account">log in to your account</a></div>';
                     }
                     else
                     {
-                        //$data['body']  = "error on query";
+                        $info['message'] = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> There was an error processing your registration. Please try again.</div>';
                     }
                 }
             }
         }
-        else
-        {
-            //$data['body']  = $this->load->view('_sign_up_view');
-        }
 
         $this->load->view('header_view', $data);
-        $this->load->view('_sign_up_view');
+        $this->load->view('_sign_up_view', $info);
         $this->load->view('footer_view');
 
     }

@@ -21,7 +21,7 @@ class Auth_Model extends CI_Model
         $password = $login_array_input[1];
 
         // select data from database to check user exist or not?
-        $query = $this->db->query("SELECT * FROM `users` WHERE `email`='" . $email . "' LIMIT 1");
+        $query = $this->db->query("SELECT * FROM `users` WHERE `email`=? LIMIT 1", array($email));
 
         if ($query->num_rows() > 0)
         {

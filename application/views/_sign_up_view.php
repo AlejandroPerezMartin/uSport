@@ -6,11 +6,13 @@
     echo form_open(base_url() . 'index.php/register/', $attributes);
 ?>
 
-<?php if (validation_errors()) echo '<div class="alert alert-danger" role="alert">' . validation_errors() . '</div>' ?>
+<?php if (isset($message)) echo $message; ?>
+
+<?php if (validation_errors()) echo '<div class="alert alert-danger" role="alert"><p><strong>Please correct the errors below:</strong></p>' . validation_errors() . '</div>' ?>
 
 <fieldset>
 
-    <legend>Create a uSport account!</legend>
+    <legend><h2>Create a uSport account!</h2></legend>
 
     <div class="form-group">
         <div class="col-xs-3">

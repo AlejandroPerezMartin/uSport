@@ -40,11 +40,13 @@ class Menu_Model extends CI_Model
             array(
               'title' => 'Dashboard',
               'description' => 'Go to your dashboard',
+              'icon' => 'th-large',
               'url' => base_url()
             ),
             array(
               'title' => 'Logout',
               'description' => 'Close this session',
+              'icon' => 'log-out',
               'url' => base_url() . 'index.php/logout'
             )
         );

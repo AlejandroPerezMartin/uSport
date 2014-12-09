@@ -21,28 +21,29 @@ class Create extends CI_Controller
         }
 
         $data = array(
-            'title' => 'Create event',
-            'menu' => $this->menu_model->menu_top()
-        );
+                      'title' => 'Create event',
+                      'menu' => $this->menu_model->menu_top()
+                      );
+
+        $info = array();
 
         if ($this->input->post('submit'))
         {
 
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('description', 'Description', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[140]|xss_clean');
             $this->form_validation->set_rules('photo', 'Photo', 'trim|prep_url|xss_clean');
             $this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
             $this->form_validation->set_rules('city', 'City', 'trim|required|xss_clean');
             $this->form_validation->set_rules('sport', 'Sport', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('price', 'Price', 'trim|required|numeric|xss_clean');
-            $this->form_validation->set_rules('maxmembers', 'Max number of members', 'trim|required|integer|xss_clean');
+            $this->form_validation->set_rules('maxmembers', 'Max. number of members', 'trim|required|integer|xss_clean');
 
             // Set Custom messages
             //$this->form_validation->set_message('required', 'Your custom message here');
 
             if ($this->form_validation->run() == FALSE)
             {
-                //$data['body']  = $this->load->view('_sign_up_view');
+                // show errors
             }
             else
             {
@@ -52,39 +53,33 @@ class Create extends CI_Controller
                 $address     = $this->input->post('address');
                 $city        = $this->input->post('city');
                 $sport       = $this->input->post('sport');
-                $price       = $this->input->post('price');
                 $maxmembers  = $this->input->post('maxmembers');
                 $creatorid   = $this->auth_model->get_logged_user_id();
 
-                    $input_data = array(
-                                        'name'        => $name,
-                                        'description' => $description,
-                                        'photo'       => $photo,
-                                        'address'     => $address,
-                                        'city'        => $city,
-                                        'sport'       => $sport,
-                                        'price'       => $price,
-                                        'maxmembers'  => $maxmembers,
-                                        'creatorid'   => $creatorid
-                    );
+                $input_data = array(
+                                    'name'        => $name,
+                                    'description' => $description,
+                                    'photo'       => $photo,
+                                    'address'     => $address,
+                                    'city'        => $city,
+                                    'sport'       => $sport,
+                                    'maxmembers'  => $maxmembers,
+                                    'creatorid'   => $creatorid
+                );
 
-                    if ($this->db->insert('events', $input_data))
-                    {
-                        //$data['body']  = "Registration success, please login<br/>";
-                    }
-                    else
-                    {
-                        //$data['body']  = "error on query";
-                    }
+                if ($this->db->insert('events', $input_data))
+                {
+                    $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, your event was successfully created! You can see it in your <a href="' . base_url() . 'title="Go to your Dashboard">Dashboard</a></div>';
+                }
+                else
+                {
+                    $info['message'] = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> There was an error processing your registration. Please try again.</div>';
+                }
             }
-        }
-        else
-        {
-            //$data['body']  = $this->load->view('_sign_up_view');
         }
 
         $this->load->view('header_view', $data);
-        $this->load->view('create_event_view');
+        $this->load->view('create_event_view', $info);
         $this->load->view('footer_view');
 
     }

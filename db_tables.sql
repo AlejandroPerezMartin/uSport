@@ -4,15 +4,25 @@ CREATE TABLE IF NOT EXISTS `users` (
     `name`              VARCHAR(30)     NOT NULL,
     `surname`           VARCHAR(60)     NOT NULL,
     `gender`            VARCHAR(6)      NOT NULL,
-    `email`             VARCHAR(60)     NOT NULL UNIQUE,
+    `email`             VARCHAR(60)     NOT NULL UNIQUE KEY,
     `password`          VARCHAR(50)     NOT NULL,
     `birthdate`         DATE            NOT NULL,
     `city`              VARCHAR(50)     NOT NULL,
     `country`           VARCHAR(30)     NOT NULL,
     `favouritesport`    VARCHAR(150)    NOT NULL,
+    `premium`           TINYINT(1)      NOT NULL DEFAULT 0,
     `salt`              VARCHAR(50)     NOT NULL,
     PRIMARY KEY(`id`)
 ) AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `premium` (
+    `id`                INTEGER(10)     NOT NULL AUTO_INCREMENT,
+    `userid`            INTEGER(10)     NOT NULL,
+    `transactionid`     VARCHAR(125),
+    `date`              DATE            NOT NULL,
+    PRIMARY KEY(`id`),
+    FOREIGN KEY(`userid`) REFERENCES users(`id`) ON DELETE CASCADE
+) DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `events` (
     `id`                INTEGER(10)     NOT NULL AUTO_INCREMENT,
@@ -35,4 +45,11 @@ CREATE TABLE IF NOT EXISTS `userevents` (
     PRIMARY KEY(`eventid`,`userid`),
     FOREIGN KEY(`eventid`) REFERENCES events(`id`) ON DELETE CASCADE,
     FOREIGN KEY(`userid`) REFERENCES users(`id`) ON DELETE CASCADE
+) DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `media` (
+    `id`                INTEGER         NOT NULL AUTO_INCREMENT,
+    `filename`          VARCHAR(255)    NOT NULL,
+    `title`             VARCHAR(100)    NOT NULL,
+    PRIMARY KEY(`id`),
 ) DEFAULT CHARSET=utf8;

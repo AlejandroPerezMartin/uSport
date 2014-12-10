@@ -24,7 +24,7 @@
     <div class="form-group">
         <div class="col-xs-6">
             <label for="eventDescription">Description:</label>
-            <textarea id="eventDescription" name="description" value="<?php echo set_value('description') ?>" placeholder="Event description" rows="8" class="form-control"></textarea>
+            <textarea id="eventDescription" name="description" placeholder="Event description" rows="8" class="form-control"><?php echo set_value('description') ?></textarea>
         </div>
     </div>
 
@@ -72,7 +72,7 @@
     <div class="form-group">
         <div class="col-xs-4">
             <label for="maxmembers">Max. number of members</label>
-            <input type="number" name="maxmembers" id="maxmembers" min="0" placeholder="0" class="form-control" />
+            <input type="number" name="maxmembers" id="maxmembers" value="<?php echo set_value('maxmembers') ?>" min="0" placeholder="0" class="form-control" />
             <p class="help-block">Maximum number of people that can join your event.</p>
         </div>
     </div>
@@ -86,5 +86,3 @@
 </fieldset>
 
 <?php echo form_close()?>
-
-</div><!-- /.container -->

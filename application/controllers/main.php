@@ -17,8 +17,9 @@ class Main extends CI_Controller
             'title'            => 'Main page',
             'description'      => 'Page description goes here!',
             'is_main_page'     => true,
-            'dont_show_footer' => true,
+            'showFooter'       => true,
             'styles'           => array('carousel'),
+            'scripts'          => array('custom'),
             'menu'             => $this->menu_model->menu_top()
         );
 
@@ -32,7 +33,8 @@ class Main extends CI_Controller
             $this->load->view('header_view', $data);
             $events = array(
                     'joined_events'  => $this->event_model->getUserJoinedEvents(),
-                    'created_events' => $this->event_model->getUserCreatedEvents()
+                    'created_events' => $this->event_model->getUserCreatedEvents(),
+                    'interesting_events' => $this->event_model->getUserInterestingEvents()
             );
 
             $this->load->view('dashboard_view', $events);

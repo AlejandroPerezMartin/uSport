@@ -31,6 +31,11 @@
     </div>
 
     <div class="row marketing">
+
+      <div class="page-header">
+        <h2>Premium features <small>What you'll get</small></h2>
+      </div>
+
       <div class="col-lg-6">
           <h4><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Unlimited events creation</h4>
           <p>Get rid of the event creation restriction, create as much events as you want!</p>
@@ -47,5 +52,3 @@
           <p>Pay only once and you get a lifetime premium membership!</p>
       </div>
     </div>
-
-</div><!-- /.container main -->

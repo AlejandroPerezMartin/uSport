@@ -21,4 +21,7 @@
 </div>
 <input type="submit" name="submit_login" class="btn btn-lg btn-primary btn-block" value="Sign in" />
 
+<p></p>
+<p>Not registered yet? <a href="<?php echo base_url() . 'index.php/register' ?>" title="Create a uSport account">Sign up!</a></p>
+
 <?php echo form_close()?>

@@ -57,14 +57,14 @@ class Create extends CI_Controller
                 $creatorid   = $this->auth_model->get_logged_user_id();
 
                 $input_data = array(
-                                    'name'        => $name,
-                                    'description' => $description,
-                                    'photo'       => $photo,
-                                    'address'     => $address,
-                                    'city'        => $city,
-                                    'sport'       => $sport,
-                                    'maxmembers'  => $maxmembers,
-                                    'creatorid'   => $creatorid
+                    'name'        => $name,
+                    'description' => $description,
+                    'photo'       => $photo,
+                    'address'     => $address,
+                    'city'        => $city,
+                    'sport'       => $sport,
+                    'maxmembers'  => $maxmembers,
+                    'creatorid'   => $creatorid
                 );
 
                 if ($this->db->insert('events', $input_data))
@@ -73,7 +73,7 @@ class Create extends CI_Controller
                 }
                 else
                 {
-                    $info['message'] = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> There was an error processing your registration. Please try again.</div>';
+                    $info['message'] = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> There was an error creating your event. Please try again.</div>';
                 }
             }
         }

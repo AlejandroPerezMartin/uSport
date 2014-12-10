@@ -82,3 +82,36 @@ endif;
     echo '<h4 class="text-center">You haven\'t created any event yet</h4>';
 endif;
 ?>
+
+<br>
+
+<?php if ($interesting_events): ?>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Recommended events</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <?php for ($i = 0; $i < count($interesting_events); $i++): ?>
+                <?php if ($i == 3) break; ?>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/300x300" alt="<?php echo $interesting_events[$i]->name; ?>">
+                        <div class="caption">
+                            <h3><a href="<?php echo base_url() . 'index.php/events/view/id/' . $interesting_events[$i]->id; ?>"><?php echo $interesting_events[$i]->name; ?></a></h3>
+                            <p><?php echo $interesting_events[$i]->description; ?></p>
+                            <p><a href="<?php echo base_url() . 'index.php/events/view/id/' . $interesting_events[$i]->id; ?>" class="btn btn-primary" role="button">View</a>
+                               <a href="<?php echo base_url() . 'index.php/events/remove/' . $interesting_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button" onclick="return deleteEventConfirmation();">Delete</a></p>
+                           </div>
+                       </div>
+                   </div>
+               <?php endfor; ?>
+           </div>
+       </div>
+   </div>
+
+   <?php
+   else:
+    echo '<h4 class="text-center">There are no recommended events for you</h4>';
+endif;
+?>

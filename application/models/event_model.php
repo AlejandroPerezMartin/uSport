@@ -121,18 +121,13 @@ class Event_Model extends CI_Model
     {
         $user_id = $this->auth_model->get_logged_user_id();
 
-        $query = $this->db->query("SELECT * FROM `events` WHERE `creatorid` = ?", array($user_id));
+        $query = $this->db->query("SELECT `favouritesport` FROM `users` WHERE `id` = ? LIMIT 1", array($user_id))->result();
 
-        $event_ids = array();
+        $list_of_events = ($query) ? str_replace(',', "','", "'" . $query[0]->favouritesport . "'") : NULL;
 
-        foreach ($query->result() as $row)
+        if ($list_of_events)
         {
-           array_push($event_ids, $row->id);
-        }
-
-        if ($event_ids)
-        {
-            $query = $this->db->query("SELECT * FROM `events` WHERE `id` IN (" . implode(',', $event_ids) . ")");
+            $query = $this->db->query("SELECT DISTINCT e.* FROM `events` e INNER JOIN `users` u WHERE u.`city` = e.`city` AND u.`id` = $user_id AND e.`sport` IN (" . $list_of_events .")");
             return $query->result();
         }
 

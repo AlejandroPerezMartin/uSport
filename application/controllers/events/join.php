@@ -26,29 +26,29 @@ class Join extends CI_Controller
 
     public function index($eventId){
 
-        if ($this->auth_model->is_user_logged() === false)
+        if ($this->auth_model->is_user_logged() === false || $this->event_model->joinEvent($eventId, $this->auth_model->get_logged_user_id()))
         {
             redirect(base_url());
         }
 
-        $data = array(
-            'title' => 'Create event',
-            'menu'  => $this->menu_model->menu_top()
-        );
-
-        $info = array();
-
-        if ($this->event_model->joinEvent($eventId, $this->auth_model->get_logged_user_id())) {
-            $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you have successfully joined this event!</div>';
-        }
-        else
+        if ($this->event_model->hasUserReachedEventJoiningLimit())
         {
-            echo "jjsajs";
+
+            $data = array(
+                'title' => 'Become Premium',
+                'menu'  => $this->menu_model->menu_top()
+            );
+
+            $info['message'] = '<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Sorry, <strong>you have to be premium</strong> to join more events.</div>';
+            $data['styles']  = array('jumbotron-narrow');
+            $this->load->view('header_view', $data);
+            $this->load->view('_buy_premium_form', $info);
+            $this->load->view('footer_view');
+        }
+        else {
+            echo "There was an error while joining to the event. Maybe you were already joined or the max. number of members was reached.";
         }
 
-        $this->load->view('header_view', $data);
-        $this->parser->parse('event_view', $info);
-        $this->load->view('footer_view');
     }
 
 }

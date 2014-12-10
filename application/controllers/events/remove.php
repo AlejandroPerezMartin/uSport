@@ -31,7 +31,9 @@ class Remove extends CI_Controller
             redirect(base_url());
         }
 
-        var_dump($this->event_model->removeCreatedEvent($eventId, $this->auth_model->get_logged_user_id()));
+        if ($this->event_model->removeCreatedEvent($eventId, $this->auth_model->get_logged_user_id())) {
+            redirect(base_url());
+        }
     }
 
 }

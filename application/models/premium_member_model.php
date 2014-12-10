@@ -1,4 +1,3 @@
-
 <?php
 
 class Premium_Member_Model extends CI_Model
@@ -20,7 +19,7 @@ class Premium_Member_Model extends CI_Model
 
     public function isPremiumUser( $userId )
     {
-        return $this->db->query('SELECT * FROM `users` WHERE `premium`=1 LIMIT 1', array( $userId ))->result();
+        return (count($this->db->query('SELECT * FROM `users` WHERE `id`=? AND `premium`=1 LIMIT 1', array( $userId ))->result()) > 0);
     }
 
 }

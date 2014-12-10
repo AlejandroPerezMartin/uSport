@@ -19,7 +19,7 @@ class Event_Model extends CI_Model
 
     public function joinEvent($eventId, $userId)
     {
-        if ($this->getEventFromId($eventId) && !$this->isUserAlreadyJoined($eventId, $userId))
+        if ($this->getEventFromId($eventId) && !$this->isUserAlreadyJoined($eventId, $userId) && !$this->isEventFull($eventId) && !$this->hasUserReachedEventJoiningLimit())
         {
             return $this->db->query('INSERT INTO `userevents` (eventid, userid) VALUES (?, ?)', array($eventId, $userId));
         }
@@ -49,6 +49,10 @@ class Event_Model extends CI_Model
         if ($this->isUserAlreadyJoined($eventId, $this->auth_model->get_logged_user_id()))
         {
             return '<a href="' . base_url() . 'index.php/events/unjoin/' . $eventId . '" class="btn btn-lg btn-danger">Remove me from event</a>';
+        }
+
+        if ($this->isEventFull($eventId)) {
+            return '<button type="text" class="btn btn-lg btn-primary" disabled="disabled">Event is full</button>';
         }
 
         return '<a href="' . base_url() . 'index.php/events/join/' . $eventId . '" class="btn btn-lg btn-primary">Join</a>';
@@ -105,6 +109,14 @@ class Event_Model extends CI_Model
         return NULL;
     }
 
+    public function hasUserReachedEventJoiningLimit()
+    {
+        $user_id = $this->auth_model->get_logged_user_id();
+        $joining_limit = 2;
+
+        return (count($this->db->get_where('userevents', array('userid' => $user_id), $joining_limit)->result()) == $joining_limit);
+    }
+
     public function getUserInterestingEvents()
     {
         $user_id = $this->auth_model->get_logged_user_id();
@@ -127,11 +139,27 @@ class Event_Model extends CI_Model
         return NULL;
     }
 
+    public function isEventFull( $eventId )
+    {
+        $this->db->select('maxmembers');
+        $result = $this->db->get_where('events', array('id' => $eventId), 1)->result();
+
+        if ($result) return ($result[0]->maxmembers == $this->getEventOccupancy( $eventId ));
+
+        return false;
+    }
+
+    public function getEventOccupancy( $eventId )
+    {
+        return count($this->db->get_where('userevents', array('eventid' => $eventId))->result());
+    }
+
     public function hasUserReachedEventCreationLimit()
     {
         $user_id = $this->auth_model->get_logged_user_id();
+        $event_creation_limit = 2;
 
-        return (count($this->db->get_where('events', array('creatorid' => $user_id), 2)->result()) == 2);
+        return (count($this->db->get_where('events', array('creatorid' => $user_id), $event_creation_limit)->result()) == $event_creation_limit);
     }
 
 }

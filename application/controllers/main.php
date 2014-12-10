@@ -14,7 +14,7 @@ class Main extends CI_Controller
     function index()
     {
         $data = array(
-            'title'            => 'Main page',
+            'title'            => 'Dashboard',
             'description'      => 'Page description goes here!',
             'is_main_page'     => true,
             'showFooter'       => true,
@@ -25,6 +25,7 @@ class Main extends CI_Controller
 
         if ($this->auth_model->is_user_logged() === false)
         {
+            $data['title'] = 'Main page';
             $this->load->view('header_view', $data);
             $this->load->view('index_view');
             $this->load->view('footer_view');
@@ -32,8 +33,8 @@ class Main extends CI_Controller
         {
             $this->load->view('header_view', $data);
             $events = array(
-                    'joined_events'  => $this->event_model->getUserJoinedEvents(),
-                    'created_events' => $this->event_model->getUserCreatedEvents(),
+                    'joined_events'      => $this->event_model->getUserJoinedEvents(),
+                    'created_events'     => $this->event_model->getUserCreatedEvents(),
                     'interesting_events' => $this->event_model->getUserInterestingEvents()
             );
 

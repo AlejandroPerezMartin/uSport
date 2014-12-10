@@ -26,29 +26,12 @@ class Unjoin extends CI_Controller
 
     public function index($eventId){
 
-        if ($this->auth_model->is_user_logged() === false)
+        if ($this->auth_model->is_user_logged() === false || $this->event_model->unjoinEvent($eventId, $this->auth_model->get_logged_user_id()))
         {
             redirect(base_url());
         }
 
-        $data = array(
-            'title' => 'Dashboard',
-            'menu' => $this->menu_model->menu_top()
-        );
-
-        $info = array();
-
-        $unjoinEvent = $this->event_model->unjoinEvent($eventId, $this->auth_model->get_logged_user_id());
-
-        if ($unjoinEvent)
-        {
-            echo 'You were successfully unjoined from event!';
-        }
-        else
-        {
-            echo 'Error unjoining from event. Maybe you were not joined or the event does not exist anymore.';
-        }
-
+        echo 'Error unjoining from event. Maybe you were not joined or the event does not exist anymore.';
     }
 
 }

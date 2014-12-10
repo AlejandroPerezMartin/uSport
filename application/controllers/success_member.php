@@ -7,7 +7,7 @@ class Success_Member extends CI_Controller
     {
         parent::__construct();
         $this->load->library(array('form_validation'));
-        $this->load->model(array('menu_model', 'encrypt_model'));
+        $this->load->model(array('auth_model', 'menu_model', 'encrypt_model', 'premium_member_model'));
         $this->load->helper(array('form', 'url'));
         $this->load->database();
     }
@@ -24,6 +24,7 @@ class Success_Member extends CI_Controller
         if($item_price == $price && $item_currency == $currency)
         {
             $success = TRUE;
+            $this->premium_member_model->registerPremiumUser($this->auth_model->get_logged_user_id());
         }
         else
         {
@@ -37,6 +38,7 @@ class Success_Member extends CI_Controller
         $data = array(
             'title'            => 'Successful payment',
             'description'      => 'Page description goes here!',
+            'styles'           => array('jumbotron-narrow'),
             'menu'             => $this->menu_model->menu_top()
         );
 

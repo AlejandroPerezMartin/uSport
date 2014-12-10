@@ -15,5 +15,3 @@
 <p><strong>Event max. capaity:</strong> {event_maxmembers}</p>
 
 {event_button}
-
-</div><!-- /.container -->

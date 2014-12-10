@@ -70,21 +70,22 @@ class Register extends CI_Controller
                     $rand_salt    = $this->encrypt_model->genRndSalt();
                     $encrypt_pass = $this->encrypt_model->encryptUserPwd($this->input->post('password'), $rand_salt);
                     $input_data   = array(
-                                        'name' => $name,
-                                        'surname' => $surname,
-                                        'email' => $email,
-                                        'birthdate' => $birthdate,
-                                        'password' => $encrypt_pass,
-                                        'country' => $country,
-                                        'city' => $city,
-                                        'gender' => $gender,
+                                        'name'           => $name,
+                                        'surname'        => $surname,
+                                        'email'          => $email,
+                                        'birthdate'      => date('Y-m-d', strtotime($birthdate)),
+                                        'password'       => $encrypt_pass,
+                                        'country'        => $country,
+                                        'city'           => $city,
+                                        'gender'         => $gender,
                                         'favouritesport' => $favouritesport,
-                                        'salt' => $rand_salt
+                                        'salt'           => $rand_salt
                     );
 
                     if ($this->db->insert('users', $input_data))
                     {
-                        $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you are registered! Now you can <a href="' . base_url() . 'index.php/login" title="Login to your account">log in to your account</a></div>';
+                        $info['message'] = $birthdate;
+                        //$info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you are registered! Now you can <a href="' . base_url() . 'index.php/login" title="Login to your account">log in to your account</a></div>';
                     }
                     else
                     {
@@ -104,7 +105,7 @@ class Register extends CI_Controller
     {
         $parts = explode("/", $date);
 
-        if (count($parts) == 3 && checkdate($parts[1], $parts[0], $parts[2])) return true;
+        if (count($parts) == 3 && checkdate($parts[0], $parts[1], $parts[2])) return true;
 
         $this->form_validation->set_message('date_valid', 'The Date field must be MM/DD/YYYY');
         return false;

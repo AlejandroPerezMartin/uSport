@@ -39,16 +39,13 @@ class Join extends CI_Controller
         $info = array();
 
         if ($this->event_model->joinEvent($eventId, $this->auth_model->get_logged_user_id())) {
-            $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you have successfully joined this event!</div>';
+            echo "You've successfully joined this event!";
         }
         else
         {
-            echo "jjsajs";
+            echo "There was an error while joining to the event. Maybe you were already joined or the max. number of members was reached.";
         }
 
-        $this->load->view('header_view', $data);
-        $this->parser->parse('event_view', $info);
-        $this->load->view('footer_view');
     }
 
 }

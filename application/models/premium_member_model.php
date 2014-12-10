@@ -1,4 +1,3 @@
-
 <?php
 
 class Premium_Member_Model extends CI_Model

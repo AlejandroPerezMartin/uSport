@@ -1,8 +1,9 @@
 
 <div class="container main">
 
+
 <div class="page-header">
-    <h1>{event_title}</h1>
+    <h1>{event_title} <small></small></h1>
 </div>
 
 <p><strong>Event description:</strong> {event_description}</p>

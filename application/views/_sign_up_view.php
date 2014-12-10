@@ -70,37 +70,37 @@
             <label>Favourite sports:</label>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="favouritesport" value="Football" id="football"> Football
+                        <input type="checkbox" name="favouritesport[]" value="Football" id="football"> Football
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="favouritesport" value="Rugby" id="rugby"> Rugby
+                        <input type="checkbox" name="favouritesport[]" value="Rugby" id="rugby"> Rugby
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="favouritesport" value="Basketball" id="basketball"> Basketball
+                        <input type="checkbox" name="favouritesport[]" value="Basketball" id="basketball"> Basketball
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="favouritesport" value="Cycling" id="cycling"> Cycling
+                        <input type="checkbox" name="favouritesport[]" value="Cycling" id="cycling"> Cycling
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="favouritesport" value="Tennis" id="tennis"> Tennis
+                        <input type="checkbox" name="favouritesport[]" value="Tennis" id="tennis"> Tennis
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="favouritesport" value="Volleyball" id="volleyball"> Volleyball
+                        <input type="checkbox" name="favouritesport[]" value="Volleyball" id="volleyball"> Volleyball
                     </label>
                 </div>
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" name="favouritesport" value="Ski" id="ski"> Ski
+                        <input type="checkbox" name="favouritesport[]" value="Ski" id="ski"> Ski
                     </label>
                 </div>
         </div>

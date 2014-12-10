@@ -37,7 +37,7 @@ class Register extends CI_Controller
             $this->form_validation->set_rules('country', 'Country', 'trim|required|xss_clean');
             $this->form_validation->set_rules('city', 'City', 'trim|required|xss_clean');
             $this->form_validation->set_rules('gender', 'Gender', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('favouritesport', 'Favourite Sports', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('favouritesport', 'Favourite Sports', 'required|xss_clean');
             $this->form_validation->set_rules('terms', 'Terms of Sevices', 'trim|required|xss_clean');
 
             // Set Custom messages
@@ -57,7 +57,7 @@ class Register extends CI_Controller
                 $country        = $this->input->post('country');
                 $city           = $this->input->post('city');
                 $gender         = $this->input->post('gender');
-                $favouritesport = $this->input->post('favouritesport');
+                $favouritesport = implode(',', $this->input->post('favouritesport'));
                 $terms          = $this->input->post('terms');
                 $query          = $this->db->query('SELECT * FROM `users` WHERE `email`=?', array($email));
 
@@ -84,8 +84,7 @@ class Register extends CI_Controller
 
                     if ($this->db->insert('users', $input_data))
                     {
-                        $info['message'] = $birthdate;
-                        //$info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you are registered! Now you can <a href="' . base_url() . 'index.php/login" title="Login to your account">log in to your account</a></div>';
+                        $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you are registered! Now you can <a href="' . base_url() . 'index.php/login" title="Login to your account">log in to your account</a></div>';
                     }
                     else
                     {

@@ -31,9 +31,8 @@
     <div class="form-group">
         <div class="col-xs-6">
             <div class="input-group">
-                <div class="input-group-addon">http://</div>
-                <label class="sr-only" for="eventPhoto">Photo URL:</label>
-                <input id="eventPhoto" type="text" name="photo" value="<?php echo set_value('photo') ?>" placeholder="Photo URL" class="form-control" />
+                <label for="eventPhoto">Event picture:</label>
+                <em><input type="file" name="eventPhoto" size="20" /></em>
             </div>
         </div>
     </div>

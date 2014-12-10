@@ -9,7 +9,7 @@ class Event_Model extends CI_Model
         $this->load->library('session');
         $this->load->database();
         $this->load->helper('url');
-        $this->load->model(array('auth_model'));
+        $this->load->model(array('auth_model', 'premium_member_model'));
     }
 
     public function getEventFromId($id)
@@ -48,7 +48,7 @@ class Event_Model extends CI_Model
 
         if ($this->isUserAlreadyJoined($eventId, $this->auth_model->get_logged_user_id()))
         {
-            return '<a href="' . base_url() . 'index.php/events/remove/' . $eventId . '" class="btn btn-lg btn-danger">Remove me from event</a>';
+            return '<a href="' . base_url() . 'index.php/events/unjoin/' . $eventId . '" class="btn btn-lg btn-danger">Remove me from event</a>';
         }
 
         return '<a href="' . base_url() . 'index.php/events/join/' . $eventId . '" class="btn btn-lg btn-primary">Join</a>';
@@ -125,6 +125,13 @@ class Event_Model extends CI_Model
         }
 
         return NULL;
+    }
+
+    public function hasUserReachedEventCreationLimit()
+    {
+        $user_id = $this->auth_model->get_logged_user_id();
+
+        return (count($this->db->get_where('events', array('creatorid' => $user_id), 2)->result()) == 2);
     }
 
 }

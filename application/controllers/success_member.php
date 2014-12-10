@@ -36,7 +36,7 @@ class Success_Member extends CI_Controller
         );
 
         $data = array(
-            'title'            => 'Successful payment',
+            'title'            => $item_transaction,
             'description'      => 'Page description goes here!',
             'styles'           => array('jumbotron-narrow'),
             'menu'             => $this->menu_model->menu_top()

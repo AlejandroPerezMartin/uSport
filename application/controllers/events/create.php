@@ -7,7 +7,7 @@ class Create extends CI_Controller
     {
         parent::__construct();
         $this->load->library(array('form_validation'));
-        $this->load->model(array('menu_model'));
+        $this->load->model(array('menu_model', 'premium_member_model', 'event_model'));
         $this->load->helper(array('form', 'url'));
         $this->load->database();
     }
@@ -21,11 +21,22 @@ class Create extends CI_Controller
         }
 
         $data = array(
-                      'title' => 'Create event',
-                      'menu' => $this->menu_model->menu_top()
-                      );
+            'title' => 'Create event',
+            'menu'  => $this->menu_model->menu_top()
+        );
 
         $info = array();
+
+        // if user is not premium and has reached event creation limit, buy premium membership page is loaded
+        if ($this->event_model->hasUserReachedEventCreationLimit() && $this->premium_member_model->isPremiumUser($this->auth_model->get_logged_user_id()))
+        {
+            $info['message'] = '<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Sorry, <strong>you have to be premium</strong> to create more events.</div>';
+            $data['styles']  = array('jumbotron-narrow');
+            $this->load->view('header_view', $data);
+            $this->load->view('_buy_premium_form', $info);
+            $this->load->view('footer_view');
+            return;
+        }
 
         if ($this->input->post('submit'))
         {

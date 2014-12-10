@@ -6,7 +6,7 @@
     echo form_open(base_url() . 'index.php/events/create', $attributes);
 ?>
 
-<?php if (isset($message)) echo $message; ?>
+<?php if (isset($message)) var_dump($message); ?>
 
 <?php if (validation_errors()) echo '<div class="alert alert-danger" role="alert"><p><strong>Please correct the errors below:</strong></p>' . validation_errors() . '</div>' ?>
 

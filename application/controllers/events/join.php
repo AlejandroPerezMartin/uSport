@@ -31,7 +31,24 @@ class Join extends CI_Controller
             redirect(base_url());
         }
 
-        var_dump($this->event_model->joinEvent($eventId, $this->auth_model->get_logged_user_id()));
+        $data = array(
+            'title' => 'Create event',
+            'menu'  => $this->menu_model->menu_top()
+        );
+
+        $info = array();
+
+        if ($this->event_model->joinEvent($eventId, $this->auth_model->get_logged_user_id())) {
+            $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, you have successfully joined this event!</div>';
+        }
+        else
+        {
+            echo "jjsajs";
+        }
+
+        $this->load->view('header_view', $data);
+        $this->parser->parse('event_view', $info);
+        $this->load->view('footer_view');
     }
 
 }

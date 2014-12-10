@@ -5,6 +5,8 @@
       $paypal_id='usport@gmail.com';
     ?>
 
+    <?php if (isset($message)) echo $message; ?>
+
     <div class="jumbotron">
         <h1>Become Premium!</h1>
         <p class="lead">Become a premium member today and start enjoying its <strong>benefits</strong>: unlimited event creation, unlimited event joining and more!</p>

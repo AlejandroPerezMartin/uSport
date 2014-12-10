@@ -1,4 +1,4 @@
-    <?php
+<?php
 
     class View extends CI_Controller
     {
@@ -8,13 +8,12 @@
             parent::__construct();
             $this->load->model(array('menu_model', 'event_model'));
             $this->load->helper(array('url'));
-            $this->load->database();
             $this->load->library('parser');
         }
 
         public function id($eventId)
         {
-            $eventInfo = $this->event_model->getEventFromId($eventId)[0];
+            $eventInfo = ($this->event_model->getEventFromId($eventId)) ? $this->event_model->getEventFromId($eventId)[0] : NULL;
 
             if ($eventInfo)
             {
@@ -26,7 +25,7 @@
 
                 $eventData = array(
                     'event_title'       => $eventInfo->name,
-                    'event_description' => substr($eventInfo->description, 1, 10),
+                    'event_description' => $eventInfo->description,
                     'event_photo'       => $eventInfo->photo,
                     'event_address'     => $eventInfo->address,
                     'event_city'        => $eventInfo->city,
@@ -42,7 +41,7 @@
             }
             else
             {
-                echo "The requested event doesn't exists.";
+                echo "<h2>The requested event does'nt exists</h2>";
             }
         }
 

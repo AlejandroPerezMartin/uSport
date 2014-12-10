@@ -42,16 +42,13 @@ class Unjoin extends CI_Controller
 
         if ($unjoinEvent)
         {
-            $info['message'] = 'You were successfully unjoined from event';
+            echo 'You were successfully unjoined from event!';
         }
         else
         {
-            $info['message'] = 'Error unjoining from event';
+            echo 'Error unjoining from event. Maybe you were not joined or the event does not exist anymore.';
         }
 
-        $this->load->view('header_view', $data);
-        $this->load->view('dashboard_view', $info);
-        $this->load->view('footer_view');
     }
 
 }

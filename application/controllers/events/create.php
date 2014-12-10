@@ -28,8 +28,9 @@ class Create extends CI_Controller
         $info = array();
 
         // if user is not premium and has reached event creation limit, buy premium membership page is loaded
-        if ($this->event_model->hasUserReachedEventCreationLimit() && $this->premium_member_model->isPremiumUser($this->auth_model->get_logged_user_id()))
+        if ($this->event_model->hasUserReachedEventCreationLimit() && !$this->premium_member_model->isPremiumUser($this->auth_model->get_logged_user_id()))
         {
+            $data['title'] = 'Become Premium';
             $info['message'] = '<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Sorry, <strong>you have to be premium</strong> to create more events.</div>';
             $data['styles']  = array('jumbotron-narrow');
             $this->load->view('header_view', $data);
@@ -80,7 +81,7 @@ class Create extends CI_Controller
 
                 if ($this->db->insert('events', $input_data))
                 {
-                    $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, your event was successfully created! You can see it in your <a href="' . base_url() . 'title="Go to your Dashboard">Dashboard</a></div>';
+                    $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, your event was successfully created! You can see it in your <a href="' . base_url() . '" title="Go to your Dashboard">Dashboard</a></div>';
                 }
                 else
                 {

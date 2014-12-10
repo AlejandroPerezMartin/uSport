@@ -19,7 +19,7 @@ class Event_Model extends CI_Model
 
     public function joinEvent($eventId, $userId)
     {
-        if ($this->getEventFromId($eventId) && !$this->isUserAlreadyJoined($eventId, $userId) && !$this->isEventFull($eventId))
+        if ($this->getEventFromId($eventId) && !$this->isUserAlreadyJoined($eventId, $userId) && !$this->isEventFull($eventId) && !$this->hasUserReachedEventJoiningLimit())
         {
             return $this->db->query('INSERT INTO `userevents` (eventid, userid) VALUES (?, ?)', array($eventId, $userId));
         }
@@ -109,6 +109,14 @@ class Event_Model extends CI_Model
         return NULL;
     }
 
+    public function hasUserReachedEventJoiningLimit()
+    {
+        $user_id = $this->auth_model->get_logged_user_id();
+        $joining_limit = 2;
+
+        return (count($this->db->get_where('userevents', array('userid' => $user_id), $joining_limit)->result()) == $joining_limit);
+    }
+
     public function getUserInterestingEvents()
     {
         $user_id = $this->auth_model->get_logged_user_id();
@@ -131,7 +139,7 @@ class Event_Model extends CI_Model
         return NULL;
     }
 
-    public function isEventFull( $eventId)
+    public function isEventFull( $eventId )
     {
         $this->db->select('maxmembers');
         $result = $this->db->get_where('events', array('id' => $eventId), 1)->result();
@@ -149,8 +157,9 @@ class Event_Model extends CI_Model
     public function hasUserReachedEventCreationLimit()
     {
         $user_id = $this->auth_model->get_logged_user_id();
+        $event_creation_limit = 2;
 
-        return (count($this->db->get_where('events', array('creatorid' => $user_id), 2)->result()) == 2);
+        return (count($this->db->get_where('events', array('creatorid' => $user_id), $event_creation_limit)->result()) == $event_creation_limit);
     }
 
 }

@@ -34,7 +34,7 @@
                             <p><?php echo $joined_events[$i]->description; ?></p>
                             <p>
                               <a href="<?php echo base_url() . 'index.php/events/view/id/' . $joined_events[$i]->id; ?>" class="btn btn-primary" role="button">View</a>
-                              <a href="<?php echo base_url() . 'index.php/events/unjoin/' . $joined_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button">Unjoin</a>
+                              <a href="<?php echo base_url() . 'index.php/events/unjoin/' . $joined_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button" onclick="return unjoinFromEventConfirmation();">Unjoin</a>
                             </p>
                          </div>
                        </div>
@@ -46,7 +46,7 @@
 
    <?php
    else:
-    echo '<h4 class="text-center">You don\'t have any events yet</h4>';
+    echo '<h4 class="text-center">You haven\'t joined any event yet</h4>';
 endif;
 ?>
 

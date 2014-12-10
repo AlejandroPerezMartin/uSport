@@ -17,7 +17,7 @@
     <div class="form-group">
         <div class="col-xs-3">
             <label for="registerName">Name:</label>
-            <input id="registerName" type="text" name="name" value="<?php echo set_value('name') ?>" placeholder="Name" class="form-control" />
+            <input id="registerName" type="text" name="name" value="<?php echo set_value('name') ?>" placeholder="Name" class="form-control" autofocus/>
         </div>
     </div>
 
@@ -39,7 +39,7 @@
     <div class="form-group">
         <div class="col-xs-2">
             <label for="registerBirthdate">Date of birth:</label>
-            <input id="registerBirthdate" type="text" name="birthdate" value="<?php echo set_value('birthdate') ?>" class="form-control" placeholder="DD/MM/YYYY" />
+            <input id="registerBirthdate" type="text" name="birthdate" value="<?php echo set_value('birthdate') ?>" class="form-control" placeholder="MM/DD/YYYY" />
         </div>
     </div>
 

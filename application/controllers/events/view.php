@@ -12,9 +12,9 @@
             $this->load->library('parser');
         }
 
-        public function id($id)
+        public function id($eventId)
         {
-            $eventInfo = $this->event_model->getEventFromId($id)[0];
+            $eventInfo = $this->event_model->getEventFromId($eventId)[0];
 
             if ($eventInfo)
             {
@@ -33,7 +33,7 @@
                     'event_sport'       => $eventInfo->sport,
                     'event_price'       => $eventInfo->price,
                     'event_maxmembers'  => $eventInfo->maxmembers,
-                    'event_button'      => $this->event_model->getButton($id)
+                    'event_button'      => $this->event_model->getButton($eventId)
                 );
 
                 $this->load->view('header_view', $data);

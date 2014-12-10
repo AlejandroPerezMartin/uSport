@@ -24,14 +24,14 @@ class Remove extends CI_Controller
         }
     }
 
-    public function index($id){
+    public function index($eventId){
 
         if ($this->auth_model->is_user_logged() === false)
         {
             redirect(base_url());
         }
 
-        $this->event_model->removeUserFromEvent($id, $this->auth_model->get_logged_user_id());
+        var_dump($this->event_model->removeCreatedEvent($eventId, $this->auth_model->get_logged_user_id()));
     }
 
 }

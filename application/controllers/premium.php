@@ -7,7 +7,7 @@ class Premium extends CI_Controller
     {
         parent::__construct();
         $this->load->library(array('session'));
-        $this->load->model(array('auth_model', 'menu_model'));
+        $this->load->model(array('auth_model', 'menu_model', 'premium_member_model'));
         $this->load->library(array('form_validation'));
         $this->load->helper(array('form', 'url'));
         $this->load->database();

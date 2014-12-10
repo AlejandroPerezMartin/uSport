@@ -1,6 +1,6 @@
 <?php
 
-class Join extends CI_Controller
+class Unjoin extends CI_Controller
 {
 
     function __construct()
@@ -31,7 +31,27 @@ class Join extends CI_Controller
             redirect(base_url());
         }
 
-        var_dump($this->event_model->joinEvent($eventId, $this->auth_model->get_logged_user_id()));
+        $data = array(
+            'title' => 'Dashboard',
+            'menu' => $this->menu_model->menu_top()
+        );
+
+        $info = array();
+
+        $unjoinEvent = $this->event_model->unjoinEvent($eventId, $this->auth_model->get_logged_user_id());
+
+        if ($unjoinEvent)
+        {
+            $info['message'] = 'You were successfully unjoined from event';
+        }
+        else
+        {
+            $info['message'] = 'Error unjoining from event';
+        }
+
+        $this->load->view('header_view', $data);
+        $this->load->view('dashboard_view', $info);
+        $this->load->view('footer_view');
     }
 
 }

@@ -6,18 +6,19 @@
     </div>
 
     <?php if (isset($message)) echo $message; ?>
+
     <p>
         <div class="btn-group" role="group">
             <a class="btn btn-lg btn-primary" href="<?php echo base_url() . 'index.php/events/create'; ?>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create event</a>
         </div>
         <div class="btn-group" role="group">
-            <a class="btn btn-lg btn-default" href="<?php echo base_url() . 'index.php/events/create'; ?>"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search event</a>
+            <a class="btn btn-lg btn-default" href="<?php echo base_url() . 'index.php/search'; ?>"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search event</a>
         </div>
     </p>
 
 <br>
 
-<?php if ($joined_events): ?>
+<?php if (isset($joined_events)): ?>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">My joined events</h3>
@@ -52,7 +53,7 @@ endif;
 
 <br>
 
-<?php if ($created_events): ?>
+<?php if (isset($created_events)): ?>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">My created events</h3>
@@ -85,7 +86,7 @@ endif;
 
 <br>
 
-<?php if ($interesting_events): ?>
+<?php if (isset($interesting_events)): ?>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Recommended events</h3>

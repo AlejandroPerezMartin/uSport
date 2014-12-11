@@ -157,6 +157,11 @@ class Event_Model extends CI_Model
         return (count($this->db->get_where('events', array('creatorid' => $user_id), $event_creation_limit)->result()) == $event_creation_limit);
     }
 
+    public function getEventCities()
+    {
+        $this->db->select('city');
+        return $this->db->get('events')->result();
+    }
 }
 
 ?>

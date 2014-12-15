@@ -1,5 +1,12 @@
 <?php
-
+/**
+* Class and Function List:
+* Function list:
+* - __construct()
+* - index()
+* Classes list:
+* - Create extends CI_Controller
+*/
 class Create extends CI_Controller
 {
 
@@ -30,9 +37,10 @@ class Create extends CI_Controller
         // if user is not premium and has reached event creation limit, buy premium membership page is loaded
         if ($this->event_model->hasUserReachedEventCreationLimit() && !$this->premium_member_model->isPremiumUser($this->auth_model->get_logged_user_id()))
         {
-            $data['title'] = 'Become Premium';
+            $data['title']   = 'Become Premium';
             $info['message'] = '<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Sorry, <strong>you have to be premium</strong> to create more events.</div>';
             $data['styles']  = array('jumbotron-narrow');
+
             $this->load->view('header_view', $data);
             $this->load->view('_buy_premium_form', $info);
             $this->load->view('footer_view');
@@ -47,36 +55,33 @@ class Create extends CI_Controller
             $this->form_validation->set_rules('city', 'City', 'trim|required|xss_clean');
             $this->form_validation->set_rules('sport', 'Sport', 'trim|required|xss_clean');
             $this->form_validation->set_rules('maxmembers', 'Max. number of members', 'trim|required|integer|xss_clean');
+
             if (empty($_FILES['eventphoto']['name']))
             {
                 $this->form_validation->set_rules('eventphoto', 'Photo', 'required');
             }
 
-            // Set Custom messages
-            //$this->form_validation->set_message('required', 'Your custom message here');
-
-            if ($this->form_validation->run() == FALSE)
+            if ($this->form_validation->run() == false)
             {
                 // show errors
-            }
-            else
+            } else
             {
                 // File upload options
                 $config = array(
                     'upload_path'   => './assets/uploads/',
                     'allowed_types' => 'gif|jpg|png',
                     'max_size'      => '2048',
-                    'max_width'     => '0',
-                    'max_height'    => '0'
+                    'max_width'     => '1024',
+                    'max_height'    => '768'
                 );
 
+                // Load upload configuration
                 $this->upload->initialize($config);
 
                 if (!$this->upload->do_upload('eventphoto'))
                 {
                     $this->form_validation->set_message('checkdoc', $this->upload->display_errors());
-                }
-                else
+                } else
                 {
                     $photo = asset_url() . 'uploads/' . $this->upload->data()['file_name'];
                 }
@@ -89,22 +94,21 @@ class Create extends CI_Controller
                 $maxmembers  = $this->input->post('maxmembers');
                 $creatorid   = $this->auth_model->get_logged_user_id();
 
-                $input_data = array(
-                                    'name'        => $name,
-                                    'description' => $description,
-                                    'photo'       => $photo,
-                                    'address'     => $address,
-                                    'city'        => $city,
-                                    'sport'       => $sport,
-                                    'maxmembers'  => $maxmembers,
-                                    'creatorid'   => $creatorid
-                                    );
+                $input_data  = array(
+                    'name'        => $name,
+                    'description' => $description,
+                    'photo'       => $photo,
+                    'address'     => $address,
+                    'city'        => $city,
+                    'sport'       => $sport,
+                    'maxmembers'  => $maxmembers,
+                    'creatorid'   => $creatorid
+                );
 
                 if ($this->db->insert('events', $input_data))
                 {
                     $info['message'] = '<div class="alert alert-success" role="alert"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>Congratulations</strong>, your event was successfully created! You can see it in your <a href="' . base_url() . '" title="Go to your Dashboard">Dashboard</a></div>';
-                }
-                else
+                } else
                 {
                     $info['message'] = '<div class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> There was an error creating your event. Please try again.</div>';
                 }
@@ -114,9 +118,6 @@ class Create extends CI_Controller
         $this->load->view('header_view', $data);
         $this->load->view('create_event_view', $info);
         $this->load->view('footer_view');
-
     }
-
 }
-
 ?>

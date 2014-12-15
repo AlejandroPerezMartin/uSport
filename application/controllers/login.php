@@ -1,5 +1,12 @@
 <?php
-
+/**
+* Class and Function List:
+* Function list:
+* - __construct()
+* - index()
+* Classes list:
+* - Login extends CI_Controller
+*/
 class Login extends CI_Controller
 {
 
@@ -19,7 +26,7 @@ class Login extends CI_Controller
             redirect(base_url());
         }
 
-        $sub_data['login_failed'] ='';
+        $sub_data['login_failed'] = '';
 
         $data = array(
             'title'          => 'Sign in',
@@ -35,40 +42,36 @@ class Login extends CI_Controller
             $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[5]|max_length[35]|xss_clean');
             $this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> ', '</div>');
 
-            if ($this->form_validation->run() == FALSE)
+            if ($this->form_validation->run() === false)
             {
                 $data['body'] = $this->load->view('_login_form', $sub_data, true);
+
                 $this->load->view('header_view', $data);
                 $this->load->view('_login_form');
                 $this->load->view('footer_view');
-            }
-            else
+            } else
             {
                 $login_array = array($this->input->post('email'), $this->input->post('password'));
 
                 if ($this->auth_model->process_login($login_array))
                 {
-                    //login successfull
+                    // Login successfull
                     redirect(base_url());
-                }
-                else
+                } else
                 {
                     $sub_data['login_failed'] = 'Invalid username or password';
-                    $data['body'] = $this->load->view('_login_form', $sub_data, true);
+
                     $this->load->view('header_view', $data);
-                    $this->load->view('_login_form');
+                    $this->load->view('_login_form', $sub_data);
                     $this->load->view('footer_view');
                 }
             }
-        }
-        else
+        } else
         {
             $this->load->view('header_view', $data);
             $this->load->view('_login_form');
             $this->load->view('footer_view');
         }
     }
-
 }
-
 ?>

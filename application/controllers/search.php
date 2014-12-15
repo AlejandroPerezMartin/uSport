@@ -67,7 +67,6 @@ class Search extends CI_Controller
 
                 if (count($search_results) > 0)
                 {
-                    $info['message'] = $query;
                     $info['results'] = $search_results;
                     $this->load->view('header_view', $data);
                     $this->load->view('search_results_view', $info);

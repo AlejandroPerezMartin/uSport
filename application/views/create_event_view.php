@@ -3,12 +3,14 @@
 
 <?php
     $attributes = array('class' => 'form-horizontal', 'role' => 'form');
-    echo form_open(base_url() . 'index.php/events/create', $attributes);
+    echo form_open_multipart(base_url() . 'index.php/events/create', $attributes);
 ?>
 
 <?php if (isset($message)) echo $message; ?>
 
 <?php if (validation_errors()) echo '<div class="alert alert-danger" role="alert"><p><strong>Please correct the errors below:</strong></p>' . validation_errors() . '</div>' ?>
+
+<?php if (isset($updata)) var_dump($updata); ?>
 
 <fieldset>
 
@@ -32,7 +34,7 @@
         <div class="col-xs-6">
             <div class="input-group">
                 <label for="eventPhoto">Event picture:</label>
-                <em><input type="file" name="eventPhoto" size="20" /></em>
+                <em><input type="file" name="eventphoto" class="text-muted" size="20" /></em>
             </div>
         </div>
     </div>

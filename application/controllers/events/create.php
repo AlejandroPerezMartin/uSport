@@ -6,7 +6,7 @@ class Create extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->library(array('form_validation'));
+        $this->load->library(array('form_validation', 'upload'));
         $this->load->model(array('menu_model', 'premium_member_model', 'event_model'));
         $this->load->helper(array('form', 'url'));
         $this->load->database();
@@ -41,14 +41,16 @@ class Create extends CI_Controller
 
         if ($this->input->post('submit'))
         {
-
             $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
             $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[140]|xss_clean');
-            $this->form_validation->set_rules('photo', 'Photo', 'trim|prep_url|xss_clean');
             $this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
             $this->form_validation->set_rules('city', 'City', 'trim|required|xss_clean');
             $this->form_validation->set_rules('sport', 'Sport', 'trim|required|xss_clean');
             $this->form_validation->set_rules('maxmembers', 'Max. number of members', 'trim|required|integer|xss_clean');
+            if (empty($_FILES['eventphoto']['name']))
+            {
+                $this->form_validation->set_rules('eventphoto', 'Photo', 'required');
+            }
 
             // Set Custom messages
             //$this->form_validation->set_message('required', 'Your custom message here');
@@ -59,9 +61,28 @@ class Create extends CI_Controller
             }
             else
             {
+                // File upload options
+                $config = array(
+                    'upload_path'   => './assets/uploads/',
+                    'allowed_types' => 'gif|jpg|png',
+                    'max_size'      => '2048',
+                    'max_width'     => '0',
+                    'max_height'    => '0'
+                );
+
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('eventphoto'))
+                {
+                    $this->form_validation->set_message('checkdoc', $this->upload->display_errors());
+                }
+                else
+                {
+                    $photo = asset_url() . 'uploads/' . $this->upload->data()['file_name'];
+                }
+
                 $name        = $this->input->post('name');
                 $description = $this->input->post('description');
-                $photo       = $this->input->post('photo');
                 $address     = $this->input->post('address');
                 $city        = $this->input->post('city');
                 $sport       = $this->input->post('sport');
@@ -69,15 +90,15 @@ class Create extends CI_Controller
                 $creatorid   = $this->auth_model->get_logged_user_id();
 
                 $input_data = array(
-                    'name'        => $name,
-                    'description' => $description,
-                    'photo'       => $photo,
-                    'address'     => $address,
-                    'city'        => $city,
-                    'sport'       => $sport,
-                    'maxmembers'  => $maxmembers,
-                    'creatorid'   => $creatorid
-                );
+                                    'name'        => $name,
+                                    'description' => $description,
+                                    'photo'       => $photo,
+                                    'address'     => $address,
+                                    'city'        => $city,
+                                    'sport'       => $sport,
+                                    'maxmembers'  => $maxmembers,
+                                    'creatorid'   => $creatorid
+                                    );
 
                 if ($this->db->insert('events', $input_data))
                 {

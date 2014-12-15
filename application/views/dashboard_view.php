@@ -1,4 +1,3 @@
-
 <div class="container main">
 
     <div class="page-header">
@@ -29,7 +28,7 @@
                 <?php if ($i == 3) break; ?>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/300x300" alt="<?php echo $joined_events[$i]->name; ?>">
+                        <img class="img-thumbnail" src="<?php echo $joined_events[$i]->photo ?>" width="300" height="300"  alt="<?php echo $joined_events[$i]->name; ?>">
                         <div class="caption">
                             <h3><a href="<?php echo base_url() . 'index.php/events/view/id/' . $joined_events[$i]->id; ?>"><?php echo $joined_events[$i]->name; ?></a></h3>
                             <p><?php echo $joined_events[$i]->description; ?></p>
@@ -64,7 +63,7 @@ endif;
                 <?php if ($i == 3) break; ?>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/300x300" alt="<?php echo $created_events[$i]->name; ?>">
+                        <img class="img-thumbnail" src="<?php echo $created_events[$i]->photo ?>" width="300" height="300"  alt="<?php echo $created_events[$i]->name; ?>">
                         <div class="caption">
                             <h3><a href="<?php echo base_url() . 'index.php/events/view/id/' . $created_events[$i]->id; ?>"><?php echo $created_events[$i]->name; ?></a></h3>
                             <p><?php echo $created_events[$i]->description; ?></p>
@@ -86,7 +85,7 @@ endif;
 
 <br>
 
-<?php if (isset($interesting_events)): ?>
+<?php if (count($interesting_events) > 0): ?>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Recommended events</h3>
@@ -97,12 +96,11 @@ endif;
                 <?php if ($i == 3) break; ?>
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/300x300" alt="<?php echo $interesting_events[$i]->name; ?>">
+                        <img class="img-thumbnail" src="<?php echo $interesting_events[$i]->photo ?>" width="300" height="300" alt="<?php echo $interesting_events[$i]->name; ?>">
                         <div class="caption">
                             <h3><a href="<?php echo base_url() . 'index.php/events/view/id/' . $interesting_events[$i]->id; ?>"><?php echo $interesting_events[$i]->name; ?></a></h3>
                             <p><?php echo $interesting_events[$i]->description; ?></p>
                             <p><a href="<?php echo base_url() . 'index.php/events/view/id/' . $interesting_events[$i]->id; ?>" class="btn btn-primary" role="button">View</a>
-                               <a href="<?php echo base_url() . 'index.php/events/remove/' . $interesting_events[$i]->id; ?>" class="btn btn-default" style="color:crimson;" role="button" onclick="return deleteEventConfirmation();">Delete</a></p>
                            </div>
                        </div>
                    </div>

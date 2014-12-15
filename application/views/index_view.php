@@ -9,32 +9,32 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="http://claimyourjourney.com/wp-content/uploads/2012/06/bike.jpg" alt="First slide">
+          <img src="<?php echo asset_url() . 'images/img1.jpg' ?>" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>text here.</h1>
-              <p>text text text</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up for free</a></p>
+              <h1>Organize</h1>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+              <p><a class="btn btn-lg btn-primary" href="<?php echo base_url() . 'index.php/register'; ?>" role="button">Sign up for free</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAGZmZgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+          <img src="<?php echo asset_url() . 'images/img2.jpg' ?>" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>more text here</h1>
-              <p>more text...</p>
+              <h1>Join</h1>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAFVVVQAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+          <img src="<?php echo asset_url() . 'images/img3.jpg' ?>" alt="Third slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>text text and text</h1>
-              <p>something else here</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+              <h1>Meet people</h1>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
             </div>
           </div>
         </div>
@@ -89,7 +89,7 @@
           <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" src="http://placehold.it/350x350" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -97,7 +97,7 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" src="http://placehold.it/350x350" alt="Generic placeholder image">
         </div>
         <div class="col-md-7">
           <h2 class="featurette-heading">More things <span class="text-muted">here...</span></h2>
@@ -113,7 +113,7 @@
           <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive" src="http://placehold.it/350x350" alt="Generic placeholder image">
         </div>
       </div>
 

@@ -6,8 +6,7 @@ class Create extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->library('upload');
-        $this->load->library(array('form_validation'));
+        $this->load->library(array('form_validation', 'upload'));
         $this->load->model(array('menu_model', 'premium_member_model', 'event_model'));
         $this->load->helper(array('form', 'url'));
         $this->load->database();
@@ -62,16 +61,18 @@ class Create extends CI_Controller
             }
             else
             {
-
-                $config['upload_path'] = './assets/uploads/';
-                $config['allowed_types'] = 'gif|jpg|png';
-                $config['max_size'] = '2048';
-                $config['max_width']  = '0';
-                $config['max_height']  = '0';
+                // File upload options
+                $config = array(
+                    'upload_path'   => './assets/uploads/',
+                    'allowed_types' => 'gif|jpg|png',
+                    'max_size'      => '2048',
+                    'max_width'     => '0',
+                    'max_height'    => '0'
+                );
 
                 $this->upload->initialize($config);
 
-                if ( !$this->upload->do_upload('eventphoto'))
+                if (!$this->upload->do_upload('eventphoto'))
                 {
                     $this->form_validation->set_message('checkdoc', $this->upload->display_errors());
                 }

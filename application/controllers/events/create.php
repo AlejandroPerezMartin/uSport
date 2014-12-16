@@ -10,7 +10,7 @@
 class Create extends CI_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->library(array('form_validation', 'upload'));
@@ -19,7 +19,7 @@ class Create extends CI_Controller
         $this->load->database();
     }
 
-    function index()
+    public function index()
     {
 
         if ($this->auth_model->is_user_logged() === false)

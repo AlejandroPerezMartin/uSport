@@ -18,7 +18,7 @@ class Main extends CI_Controller
         $this->load->database();
     }
 
-    function index()
+    public function index()
     {
         $data = array(
             'title'        => 'Dashboard',

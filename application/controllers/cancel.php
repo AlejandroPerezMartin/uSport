@@ -9,7 +9,7 @@
 class Cancel extends CI_Controller
 {
 
-    function index()
+    public function index()
     {
         echo "Your payment has been cancelled.";
     }

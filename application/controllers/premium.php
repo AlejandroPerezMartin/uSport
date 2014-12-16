@@ -19,7 +19,7 @@ class Premium extends CI_Controller
         $this->load->database();
     }
 
-    function index()
+    public function index()
     {
         if ($this->auth_model->is_user_logged() === false)
         {

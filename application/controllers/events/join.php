@@ -11,7 +11,7 @@
 class Join extends CI_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->library(array('form_validation'));
@@ -20,7 +20,7 @@ class Join extends CI_Controller
         $this->load->database();
     }
 
-    function _remap($method, $args)
+    public function _remap($method, $args)
     {
         if (method_exists($this, $method))
         {

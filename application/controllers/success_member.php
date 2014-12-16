@@ -10,7 +10,7 @@
 class Success_Member extends CI_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->library(array('form_validation'));
@@ -19,7 +19,7 @@ class Success_Member extends CI_Controller
         $this->load->database();
     }
 
-    function index()
+    public function index()
     {
         $item_transaction = $_REQUEST['tx']; // Paypal transaction ID
         $item_price       = $_REQUEST['amt']; // Paypal received amount

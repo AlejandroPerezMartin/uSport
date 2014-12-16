@@ -11,7 +11,7 @@
 class Register extends CI_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
         $this->load->library(array('form_validation'));
@@ -20,7 +20,7 @@ class Register extends CI_Controller
         $this->load->database();
     }
 
-    function index()
+    public function index()
     {
         if ($this->auth_model->is_user_logged() === true)
         {
@@ -101,7 +101,7 @@ class Register extends CI_Controller
         $this->load->view('footer_view');
     }
 
-    public function date_valid($date)
+    private function date_valid($date)
     {
         $parts = explode("/", $date);
 

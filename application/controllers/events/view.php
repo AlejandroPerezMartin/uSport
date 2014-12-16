@@ -10,12 +10,12 @@
 class View extends CI_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('menu_model', 'event_model'));
-        $this->load->helper(array('url'));
         $this->load->library('parser');
+        $this->load->helper(array('url'));
+        $this->load->model(array('menu_model', 'event_model'));
     }
 
     public function id($eventId)

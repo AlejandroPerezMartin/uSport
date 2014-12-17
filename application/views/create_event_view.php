@@ -26,7 +26,7 @@
     <div class="form-group">
         <div class="col-xs-6">
             <label for="eventDescription">Description:</label>
-            <textarea id="eventDescription" name="description" placeholder="Event description" rows="8" class="form-control"><?php echo set_value('description') ?></textarea>
+            <textarea id="description" name="description" placeholder="Event description" rows="15" class="form-control"><?php echo set_value('description') ?></textarea>
         </div>
     </div>
 

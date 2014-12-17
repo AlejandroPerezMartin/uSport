@@ -28,8 +28,9 @@ class Create extends CI_Controller
         }
 
         $data = array(
-            'title' => 'Create event',
-            'menu'  => $this->menu_model->menu_top()
+            'title'   => 'Create event',
+            'menu'    => $this->menu_model->menu_top(),
+            'scripts' => array('ckeditor/ckeditor', 'custom')
         );
 
         $info = array();
@@ -49,7 +50,7 @@ class Create extends CI_Controller
 
         if ($this->input->post('submit'))
         {
-            $this->form_validation->set_rules('name', 'Name', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('name', 'Name', 'trim|required|htmlentities|xss_clean');
             $this->form_validation->set_rules('description', 'Description', 'trim|required|min_length[140]|xss_clean');
             $this->form_validation->set_rules('address', 'Address', 'trim|required|xss_clean');
             $this->form_validation->set_rules('city', 'City', 'trim|required|xss_clean');

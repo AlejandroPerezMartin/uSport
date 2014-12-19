@@ -33,7 +33,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-             <?php echo $menu; ?>
+             <?php if (isset($menu)) echo $menu; ?>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

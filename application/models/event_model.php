@@ -135,7 +135,7 @@ class Event_Model extends CI_Model
     public function getUserInterestingEvents()
     {
         $user_id        = $this->auth_model->get_logged_user_id();
-        $query          = $this->db->query("SELECT `favouritesport` FROM `users` WHERE `id`                 = ? LIMIT 1", array($user_id))->result();
+        $query          = $this->db->query("SELECT `favouritesport` FROM `users` WHERE `id` = ? LIMIT 1", array($user_id))->result();
         $list_of_events = ($query) ? str_replace(',', "','", "'" . $query[0]->favouritesport . "'") : null;
 
         if ($list_of_events)

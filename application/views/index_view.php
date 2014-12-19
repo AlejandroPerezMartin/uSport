@@ -52,7 +52,6 @@
 
     <div class="container marketing">
 
-      <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
           <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
@@ -74,8 +73,6 @@
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
-
-      <!-- START THE FEATURETTES -->
 
       <hr class="featurette-divider">
 

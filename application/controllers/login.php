@@ -38,7 +38,7 @@ class Login extends CI_Controller
 
         if ($this->input->post('submit_login'))
         {
-            $this->form_validation->set_rules('email', 'email', 'trim|required|min_length[3]|max_length[20]|xss_clean');
+            $this->form_validation->set_rules('email', 'email', 'trim|valid_email|required|min_length[3]|max_length[20]|xss_clean');
             $this->form_validation->set_rules('password', 'password', 'trim|required|min_length[5]|max_length[35]|xss_clean');
             $this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> ', '</div>');
 

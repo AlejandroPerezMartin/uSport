@@ -10,8 +10,6 @@
 
 <?php if (validation_errors()) echo '<div class="alert alert-danger" role="alert"><p><strong>Please correct the errors below:</strong></p>' . validation_errors() . '</div>' ?>
 
-<?php if (isset($updata)) var_dump($updata); ?>
-
 <fieldset>
 
     <legend><h2>Create event</h2></legend>

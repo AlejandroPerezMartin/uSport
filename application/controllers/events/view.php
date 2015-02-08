@@ -47,7 +47,7 @@ class View extends CI_Controller
             $this->load->view('footer_view');
         } else
         {
-            echo "<h2>The requested event does'nt exists</h2>";
+            echo "<h2>The requested event doesn't exists</h2>";
         }
     }
 }
